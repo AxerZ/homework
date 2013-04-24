@@ -1,0 +1,79 @@
+{{include file='Header.mtpl'}}
+{{assign var='a' value=$obj->GetOneHw($hID) }}
+
+<link type="text/css" rel="stylesheet" href="{{$smarty.const.SITE_URL}}js/validator/validator.css"></link>
+
+<script type="text/javascript" src="{{$smarty.const.SITE_URL}}js/dyniframesize.js"></script>
+<script src="{{$smarty.const.SITE_URL}}js/validator/formValidator_min.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript" src="{{$smarty.const.SITE_URL}}js/datepicker/WdatePicker.js"></script>
+<script type="text/javascript">
+$(function() {
+$("#closed").val("{{$a.closed}}");
+$("#display").val("{{$a.display}}");
+$("#upPasswd").val("{{$a.upPasswd}}");
+$.formValidator.initConfig({formid:"f1", onerror:function(msg){alert(msg); return false;}, onsuccess:function(){}});
+$("#from").focus(function(){WdatePicker({lang:'zh-tw', minDate:'%y-%M-#{%d-1}', startDate:'%y-%M-%d', skin:'whyGreen',oncleared:function(){$(this).blur();},onpicked:function(){$(this).blur();}})}).formValidator({onshow:"請選擇開始日期",onfocus:"請選擇開始日期",oncorrect:"日期已選擇",empty:true}).inputValidator({min:6,onerror:"日期錯誤或未選擇日期"});
+$("#to").focus(function(){WdatePicker({lang:'zh-tw',startDate:'%y-%M-{%d+1}', skin:'whyGreen',oncleared:function(){$(this).blur();},onpicked:function(){$(this).blur();}})}).formValidator({onshow:"請選擇結束日期",onfocus:"請選擇結束日期",oncorrect:"日期已選擇",empty:true}).inputValidator({min:6,onerror:"日期錯誤或未選擇日期"});
+$("#sb1").click(function(){
+  var msg="";
+  if($("#hwTitle").val()=="")msg += "作業標題名稱必填\n";
+  if($("#hwO").val()=="")msg += "發佈人必填\n";
+  if( $("#upPasswd").val()==1 && $("#passwd").val()=="")msg += "設定上傳需密碼則上傳作業密碼必填\n";
+  if($("#from").val()=="")msg += "上傳開始日期必填\n";
+  if($("#to").val()=="")msg += "上傳結束日期必填\n";
+  if(msg =="")return true;
+  alert("錯誤：\n"+msg);
+  return false;
+});
+});
+</script>
+
+<body>
+{{include file='Banner.mtpl'}}
+
+<div style="height:32px;">
+  <div style="float:left; width:700px;text-align:left;"><a href="{{$smarty.const.SITE_URL}}">作業上傳首頁</a> &gt; <a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework">作業管理</a> &gt; 修改作業--[{{$a.hID}}] {{$a.hwTitle}}</div>
+  <div style="float:right; width:300px; text-align:right;"></div>
+</div>
+
+<div>
+  <form action="{{$smarty.const.SITE_URL}}manage.php" method="post" id="f1">
+    <input type="hidden" name="stp" value="5">
+    <input type="hidden" name="f" value="ChangeHomework">
+    <input type="hidden" name="hID" value="{{$a.hID}}">
+
+<table width="99%" cellpadding="3" cellspacing="3" border="0">
+<tr bgcolor="#E1DFE2"><td width="120">作業發佈人 *</td><td width="400"><input name="hwO" id="hwO" size="50" maxlength="250" type="text" value="{{$a.hwO}}" /></td></tr>
+<tr bgcolor="#E1DFE2"><td>作業標題名稱 *</td><td><input name="hwTitle" id="hwTitle" size="50" maxlength="50" type="text" value="{{$a.hwTitle}}" /></td></tr>
+<tr><td>上傳作業密碼 </td><td><input name="passwd" id="passwd" size="12" maxlength="12" type="text" value="{{$a.passwd}}" /><font class="docfont"> 說明：學生上傳作業需輸入此密碼。</font></td></tr>
+<tr><td>班級/群組</td><td><input name="classID" id="classID" size="12" maxlength="12" type="text" value="{{$a.classID}}" /><font class="docfont"> 說明：同個班級在作業列表時會折疊起來，因此可加註學年，例"101學年1年2班"、"2甲[101]"、"101電腦測驗"，如不折疊請留空。</font></td></tr>
+<tr bgcolor="#E1DFE2"><td>作業序 *</td><td><input name="rank" id="rank" size="4" maxlength="2" type="text" value="{{$a.rank}}" /><font class="docfont"> 說明：數字越高越優先，此序僅供自己的作業排序。</font></td></tr>
+<tr bgcolor="#E1DFE2"><td>上傳作業有效日期 *</td><td>
+  <div>自 <input name="from" id="from" value="{{$a.fromDT}}" readonly type="text" size="12"/> 至 <input name="to" id="to" value="{{$a.dueDT}}" readonly type="text" size="12" /></div>
+   <font class="docfont">說明：有效日期起(含當日)時至結束(含當日)，非有效日期期間不能上傳。</font>
+</td></tr>
+<tr><td>作業描述</td><td><textarea name="remark" cols="80" rows="6" id="remark">{{$a.remark}}</textarea><br />
+<font class="docfont">作業描述會顯示在前台給上傳者觀看，限定250個字元。</font>
+</td></tr>
+
+<tr bgcolor="#D1EFD2"><td>作業屬性</td><td>
+  上下架 <select name="closed" id="closed" style="width:150px;"><option value="1">失效作業(不上架)</option><option value="0" selected="selected">有效作業(上架中)</option></select><br />
+  <font class="docfont">上架的作業會出現在列表中，下架的作業只會在後台管理頁面出現。</font><br />
+  設定展示 <select name="display" id="display" style="width:150px;"><option value="1">展示中</option><option value="0" selected="selected">不展示</option></select><br />
+  <font class="docfont">展示的作業可以讓其他使用者下載，不展示的作業只會出現在列表，其他使用者無法下載也不能觀看，但可以點選上傳，適用在作業上傳進行中。</font><br />
+  上傳需要密碼 <select name="upPasswd" id="upPasswd" style="width:150px;"><option value="1">上傳需要密碼</option><option value="0" selected="selected">上傳不需密碼</option></select><br />
+  <font class="docfont">上傳需要密碼則除了時間限制外還需要輸入正確密碼。</font><br />
+</td></tr>
+
+
+<tr><td colspan="3" align="center" height="45"><input name="sb1" id="sb1" value=" 修 改 作 業 " type="submit" />
+</td></tr>
+</table>
+</form>
+
+
+</div>
+
+{{include file='Footer.mtpl'}}
+
+</body>

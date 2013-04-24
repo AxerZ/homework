@@ -1,0 +1,56 @@
+{{include file='Header.mtpl'}}
+{{assign var='b' value=$obj->GetOneUploadHw($sn) }}
+{{assign var='d' value=$obj->GetOneHw($b.hID) }}
+
+<script type="text/javascript" src="{{$smarty.const.SITE_URL}}js/blockUI/jquery.blockUI.js"></script>
+<script type="text/javascript">
+$(function() {
+  $("#sb1").click(function(){
+    var msg="";
+//    if( $("#fn").val() == "") msg += "請選擇上檔案\n";
+    if( $("#cname").val() == "") msg += "上傳人姓名必填\n"; 
+    if( $("#passwd").val() == "") msg += "刪除及修改密碼必填\n";
+    if( msg != ""){ alert( "錯誤：\n" +msg); return false; }
+  });
+});
+</script>
+</head>
+<body>
+{{include file='Banner.mtpl'}}
+<div style="height:32px;">
+  <div style="float:left; width:450px;text-align:left;"><a href="{{$smarty.const.SITE_URL}}">作業上傳首頁</a> &gt; <a href="{{$smarty.const.SITE_URL}}index/List">作業列表</a> &gt; <a href="{{$smarty.session.currURL}}">{{$d.hwTitle}}</a> &gt; 作業修改</div>
+</div>
+
+<div style="text-align:left;">
+
+<h3 style="text-shadow: 5px 5px 5px #197FD8;">{{$d.hwTitle}}</h3>
+<table width="100%" cellpadding="3" cellspacing="3" border="1" style="border:3px solid #71BF0B;border-collapse:collapse;text-align:left; font-size:11pt;">
+<tr><td><small>[{{$d.hID}}]</small></td><td>發佈人 {{$d.hwO}}</td><td>上傳件數 {{$d.uploadCnt}}</td><td>通過件數 {{$d.passedCnt}}</td><td>點閱 {{$d.clicked}}</td><td>上傳有效日期 {{$d.fromDT}} ~ {{$d.dueDT}}</td><td>屬性 {{if $d.display eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/eye.png" alt="開放訪客參觀">{{/if}} {{if $d.closed eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/disconnect.png" alt="關閉中作業">{{/if}}</td>
+</tr></table>
+<table width="100%">
+{{if $d.canUpload eq 1 }}
+<tr><td>
+<div style="font-size:11pt; line-height:30px; padding:5px; background-color:#D6E1FF;">
+<B>作業修改 </B>
+<form action="{{$smarty.const.SITE_URL}}homework.php" id="up" method="post" enctype="multipart/form-data">
+<input type="hidden" name="f" value="ModMyHw" />
+<input type="hidden" name="snc" value="{{$obj->LongEncode($sn)}}" />
+<input name="MyFile" id="fn" type="file" size="44" /><br />
+<font class="noticefont">已上傳檔案：{{$b.oFileName}} {{$b.size}}bytes 要置換檔案請重傳，否則留空</font><br />
+上傳人姓名 * <input type="text" name="cname" id="cname" value="{{$b.cname}}" size="12" maxlength="12"  /> <br />
+上傳文件說明 <input type="text" name="remark" value="{{$b.remark}}" size="60" maxlength="100"  /> <font class="docfont">文件說明限訂最多100個字</font><br />
+請輸入刪除及修改密碼 * <input type="text" name="passwd" id="passwd" value="{{$b.modPasswd}}" size="12" maxlength="12" />  <font class="warningfont">最大長度為12，此欄為未來修改及刪除的依據</font><br />
+<input id="sb1" type="submit" value="修改"/></form>
+</div>
+{{else}}
+<tr><td height="80">
+<span style="padding:10px; background-color:hsl(7, 90%, 36%); color:white;">非上傳時間無法上傳</span>
+{{/if}}
+</td></tr></table>
+
+
+</div>
+
+{{include file='Footer.mtpl'}}
+
+</body>

@@ -1,0 +1,114 @@
+{{include file='Header.mtpl'}}
+{{assign var='b' value=$obj->GetTableArr() }}
+
+<link type="text/css" rel="stylesheet" href="{{$smarty.const.SITE_URL}}js/validator/validator.css"></link>
+<script src="{{$smarty.const.SITE_URL}}js/validator/formValidator_min.js" type="text/javascript" charset="UTF-8"></script>
+<script type="text/javascript" src="{{$smarty.const.SITE_URL}}js/datepicker/WdatePicker.js"></script>
+<script type="text/javascript">
+$(function() {
+//$("del").addClass("deltag");
+//$("#_kw").attr("checked",{{$b._kw|default:"false"}});
+//if( !{{$b._kw|default:0}} )$("#_kw").attr("checked",false); else $("#_kw").attr("checked",true);
+//if( !{{$b._date|default:0}} )$("#_date").attr("checked",false); else $("#_date").attr("checked",true);
+$("#from").val("{{$b.from}}");
+$("#to").val("{{$b.to}}");
+$("#kw").val("{{$b.kw}}");
+$("#sb2").click(function(){  
+  $("#f1").attr("target","_top"); $("#stp").val(0); return cx();});
+
+$.formValidator.initConfig({formid:"f1", onerror:function(msg){alert(msg); return false;}, onsuccess:function(){}});
+$("#from").focus(function(){WdatePicker({lang:'zh-tw', minDate:'#{%y-2}-%M-#{%d-1}', startDate:'%y-%M-%d', skin:'whyGreen',oncleared:function(){$(this).blur();},onpicked:function(){$(this).blur();}})}).formValidator({onshow:"請選擇開始日期",onfocus:"請選擇開始日期",oncorrect:"日期已選擇",empty:true}).inputValidator({min:6,onerror:"日期錯誤或未選擇日期"});
+$("#to").focus(function(){WdatePicker({lang:'zh-tw',startDate:'%y-%M-{%d+1}', skin:'whyGreen',oncleared:function(){$(this).blur();},onpicked:function(){$(this).blur();}})}).formValidator({onshow:"請選擇結束日期",onfocus:"請選擇結束日期",oncorrect:"日期已選擇",empty:true}).inputValidator({min:6,onerror:"日期錯誤或未選擇日期"});
+function cx(){
+/*  if ( $("#_kw").attr('checked')){ var kw=$("#kw").val(); if( kw==""){ alert("關鍵字搜尋請輸入關鍵字！"); return false; }  }
+  var _from=$("#from").val();
+  var _to=$("#to").val();
+  if ( $("#_date").attr('checked')){
+    if( _from=="" && _to==""){
+      alert("已勾選限定有效日期，但未設定日期範圍，請檢查！");
+      return false;
+    }
+  }
+//  _kw= (typeof($("input[name=_kw]:checked").val()) == "undefined" )? "0":"1";
+//  _date= (typeof($("input[name=_date]:checked").val()) == "undefined" )? "0":"1";
+//  var s="_kw="+_kw + ",_date="+_date;
+//  $("#s").val(s);
+*/
+return true;
+}
+});
+</script>
+
+<body>
+{{include file='Banner.mtpl'}}
+<div style="height:32px;">
+  <div style="float:left; width:450px;text-align:left;"><a href="{{$smarty.const.SITE_URL}}">作業上傳首頁</a> &gt; 作業管理頁--作業列表</div>  
+  <div style="float:right; width:350px; text-align:right; font-weight:bold; margin-right:10px;">
+[<a href="{{$smarty.const.SITE_URL}}manage.php?f=AccManage" title="帳號管理">帳號管理</a>] 
+[<a href="{{$smarty.const.SITE_URL}}manage.php?f=ChangeHomework" title="新增作業">+ 新增作業</a>]</div>
+</div>
+
+<div style="text-align:left;">
+<div class="formbox">
+  <form action="{{$smarty.const.SITE_URL}}manage.php" name="f1" method="POST" id="f1">
+    <input name="f"  value="Homework" readonly type="hidden" />
+    <img src="{{$smarty.const.SITE_URL}}images/manage/eye.png" title="作業搜尋"  width="24" height="24" />
+    <input id="kw" name="kw" type=text size=24 maxlength=20 value=""> 建立日期
+    <input name="from" id="from" value="" readonly type="text" size="12"/> 至 <input name="to"  value="" id="to" readonly type="text" size="12"/>
+    <input id="sb2" type="submit" value="篩 選" style="background:#95103A; color:white; width:100px; padding:2px;" />
+    <input type="reset" id="sb1" value="清除" style="background:white; color:#95103A; width:50px; padding:2px;" 
+        onclick="location.href='{{$smarty.const.SITE_URL}}manage.php?f=Homework'; return false;"
+      />
+  </form>
+</div>
+
+<table width="99%" cellpadding="3" cellspacing="3" border="1" class="hwListTable" style="font-size:10pt;">
+<tr bgcolor="#FFC4A5"><td width="230">[號]<a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=1">+</a><a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=-1">-</a> 作業名稱 <a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=3">+</a><a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=-3">-</a> <div style="float:right; background-color:#F5F99D;">群組</div><br />
+發佈人 <a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=2">+</a><a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=-2">-</a> 建立日期
+<a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=7">+</a><a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=-7">-</a>
+</td>
+<td width="40">上傳件數 <a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=4">+</a><a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=-4">-</a></td>
+<td width="40">通過件數 <a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=5">+</a><a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=-5">-</a></td>
+<td width="40">點閱 <a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=6">+</a><a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=-6">-</a></td>
+<td width="150">上傳有效日期</td><td width="60">屬性</td>
+<td width="80">最後上傳 <a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=8">+</a><a href="{{$smarty.const.SITE_URL}}manage.php?f=Homework&amp;c={{$c}}&amp;odr=-8">-</a></td><td width="80">上傳密碼</td><td>管理</td></tr>
+
+{{foreach from=$obj->GetHwList() item=d}}
+{{if $d.closed eq 1}}<tr style="background-color:#CCC; color:#444;">{{else}}<tr>{{/if}}
+
+<td>[{{$d.hID}}] <a href="{{$smarty.const.SITE_URL}}?f=HwDetail&amp;c={{$obj->LongEncode($d.hID)}}">{{$d.hwTitle}}</a> <div style="float:right; background-color:#F5F99D;">{{$d.classID}}</div><br />{{$d.hwO}} 於{{$d.cDT}}</td>
+<td>{{$d.uploadCnt}}</td><td>{{$d.passedCnt}}</td><td>{{$d.clicked}}</td>
+{{if $d.canUpload eq 1}}<td bgcolor="#EAD16E">{{else}}<td>{{/if}}
+{{$d.fromDT}} ~ {{$d.dueDT}}</td><td>{{if $d.display eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/eye.png" alt="開放訪客參觀" title="開放訪客參觀" width="24" height="24">{{/if}} {{if $d.closed eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/disconnect.png" alt="關閉中作業" title="關閉中作業" width="24" height="24">{{/if}}
+{{if $d.upPasswd eq 1}}<img src="{{$smarty.const.SITE_URL}}images/manage/lock.png" alt="上傳需要密碼" width="24" height="24">{{/if}}
+</td><td>{{$d.lastModDT}}</td>
+{{if $d.email eq $smarty.session.email }}
+<td>{{$d.passwd}}</td>
+<td>
+[<a href='manage.php?f=Homework&amp;c={{$d.cc}}'>{{if $d.closed eq 1}}有效{{else}}無效{{/if}}</a>] 
+[<a href='manage.php?f=Homework&amp;c={{$d.dspc}}'>{{if $d.display eq 1}}不{{/if}}展示</a>] 
+[<a href='manage.php?f=Homework&amp;c={{$d.mc}}'>修</a>] 
+[<a href='manage.php?f=Homework&amp;c={{$d.hwc}}' target='_blank'>作業管理</a>] [<a href='manage.php?f=Homework&amp;c={{$d.dlc}}'>下載整包</a>]
+
+[<a href='manage.php?f=Homework&amp;c={{$d.delc}}' onclick="return confirm('已上傳作業亦會一併刪除，此操作不能復原，是否確定要刪除此筆作業單：\n\n[{{$d.hID}}] {{$d.hwTitle}}？')"><font color="red">刪</font></a>]
+</td>
+{{else}}
+<td>-</td>
+<td>-</td>
+{{/if}}
+</tr>
+{{/foreach}}
+<tr><td colspan="10"><div class="fy">{{$obj->CreateHwMngListPgStr()}}</div></td></tr>
+</table>
+
+<div style="margin-top:10px; font-size:13px;">
+* 灰色底：無效的作業　<img src="{{$smarty.const.SITE_URL}}images/manage/eye.png" alt="開放訪客參觀" title="開放訪客參觀"  width="18" height="18" />：開放訪客參觀　<img src="{{$smarty.const.SITE_URL}}images/manage/disconnect.png" alt="關閉中作業" title="關閉中作業"  width="18" height="18" />：關閉中作業
+<img src="{{$smarty.const.SITE_URL}}images/manage/lock.png" alt="上傳需要密碼" title="上傳需要密碼"  width="18" height="18" />：上傳需要密碼<br />
+* 上傳時間黃底：作業接受上傳中
+</div>
+
+</div>
+
+{{include file='Footer.mtpl'}}
+
+</body>

@@ -1,0 +1,55 @@
+{{include file='Header.mtpl'}}
+
+<script type="text/javascript">
+$(function() {
+  $("#sb1").click(function(){
+    var msg="";
+    if( $("#fn").val() == "") msg += "請選擇上檔案\n";
+    if( $("#cname").val() == "") msg += "上傳人姓名必填\n"; 
+    if( $("#passwd").val() == "") msg += "刪除及修改密碼必填\n";
+    if( msg != ""){ alert( "錯誤：\n" +msg); return false; }
+  });
+});
+</script>
+</head>
+
+
+
+</head>
+<body>
+{{include file='Banner.mtpl'}}
+<div style="height:32px;">
+  <div style="float:left; width:450px;text-align:left;"><a href="{{$smarty.const.SITE_URL}}">作業上傳首頁</a> &gt; 關於</div>
+</div>
+
+
+<div style="text-align:left;">
+
+<h3>特色：</h3>
+<p style="text-indent:32px;">過去，我們請學生作業上傳，總是替每一個學生建立帳號，在教學的現場上，學生一天到底忘記帳號密碼；同時，新進轉走的學生，老師還要一一的刪除帳號，煩不勝煩。為什麼不改變做法？
+</p>
+<p style="text-indent:32px;">因此，我讓每個老師開作業，請同學自己上傳時設定密碼，學生下次上課時，可以用自己的密碼把自己的檔案下載修改或刪除。老師可以設定上傳期間，非此上傳期間不淮學生上傳，也可以藉此控管學生繳交作業的期間；如果比較龜毛一點，還可以設定上傳的密碼，學生在上課時老師告知密碼，學生上傳前要先輸入這組密碼，才淮許上傳，雖然我覺得這是給自己找麻煩，不過此功能我還是有寫。</p>
+<p style="text-indent:32px;">過去，學生上傳時，其他同學看到都可以下載別人的作業，有些偷懶的學生還會下載同學的作業下來改，我改進這個缺點，只要老師開作業時設定「不展示」則此作業就只能上傳，其他人無法下載，待老師評完分數再去管理學生作業設定展示，設定展示後會放到展示頁面，給訪客下載。</p>
+<p>
+剩下還有一些功能，有興趣的人自己研究啦，祝大家使用愉快。(程式有BUGS也不吝告知)
+</p>
+
+<h3>特色下載及安裝：</h3>
+<p>精讚部落 <a href="http://note.tc.edu.tw/740.html" title="作業上傳程式下載">http://note.tc.edu.tw/740.html</a></p>
+
+</p>
+
+<h3>作者及授權：</h3>
+<p>
+版權宣告：本程式遵從GNUv3規範 http://www.gnu.org/licenses/gpl.html<br />
+您可以依自身需要修改，但不得販售及營利<br />
+作者：axer@tc.edu.tw 張本和 有程式的使用上問題或建議可以來信討論 ^ ^ 3Q<br />
+2012.2.16 ~ 3.14
+</p>
+
+
+</div>
+
+{{include file='Footer.mtpl'}}
+
+</body>
