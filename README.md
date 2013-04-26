@@ -1,29 +1,26 @@
-homework
-========
+mework Upload 精讚版作業上傳
+=========
 
-Homework upload ,JinZang version. 作業上傳精讚版 By axer@tc.edu.tw
+Homework upload for school, JinZang version.
 
-To see the details in http://note.tc.edu.tw/740.html  
+  - 中文說明請看此 http://note.tc.edu.tw/740.html
 
-安裝 [中文]
-1. 使用git下載到目錄 your_path
-  $ git clone https://github.com/AxerZ/homework.git your_path
+安裝
+-
 
-2. 修改目錄的權限
-$ cd your_path
++  使用git下載到目錄 your_path
+
+```$ git clone https://github.com/AxerZ/homework.git your_path
+```
+
++  修改目錄的權限
+
+```$ cd your_path
 $ chmod -R 777 upload/
 $ chmod 777 libs/cache
 $ chmod 777 libs/templates_c
-
-
-Install [English]
-1. download to your_path
-  $ git clone https://github.com/AxerZ/homework.git your_path
-
-2. modify directory privilleges;
-$ cd your_path
-$ chmod -R 777 upload/
-$ chmod 777 libs/cache
-$ chmod 777 libs/templates_c
-
+```
+Contact
+-----------
+Problems please contact axer@tc.edu.tw
 
