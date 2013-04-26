@@ -58,17 +58,6 @@ define('SEMESTER2', 2); // 學期2起始月份
 
 define('HWPREFIX', 'hw'); // 作業目錄字首xx，產生的目錄會是 xx1, xx2, xx3...
 
-//define('SEMESTER3', 2); // 學期3起始月份
-
-//圖片伺服器   正式用-------------------------------------------
-//$FtpServer = "122.146.203.240"; //ftp圖片至遠端主機之IP
-//$FtpAcc = "web5_admin"; //Ftp主機登入帳號
-//$FtpPwd = "adminuser";  //Ftp主機登入密碼
-//$FtpPath = "/web/webimage/";//ftp圖片至遠端主機之資料路徑
-//$PIC_SERVER = "http://image.hotkt.com/webimage/";//圖片讀取主機及資料夾
-
-//$SWF_GATEWAY = $SITE_URL . "libs/amfphp1.9/gateway.php";
-
 // ========== 程式設定結束 ===============
 // 以下內容請勿任意修改，否則會造成程式損害
 
