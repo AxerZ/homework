@@ -1,0 +1,3 @@
+RewriteEngine on
+RewriteCond %{HTTP_REFERER} !^http(s)?://(www\.)?heart.tc.edu.tw [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ - [NC,F,L]
