@@ -87,6 +87,22 @@ switch($f){
     $view->assign('msg', $msg);
     $view->display('Message.mtpl');
     break;
+  case "ChangeHwFilePWD": //變更學生上傳檔案之存取密碼
+	$wt=2000;
+
+    if(isset($_POST['passwd']) and trim($_POST['passwd'])<>""){
+		$sn = (int)$obj->LongDecode($_POST['c']);
+		$IsOk =$obj->ProcChangeUpHwAttr($sn, "modPasswd", trim($_POST['passwd']));
+		if( $IsOk <=0 )$msg="伺服器狀態異常，寫入終止！ Err{$IsOk}";
+		else $msg="重設密碼成功";
+	} else {
+		$wt=5000;
+		$msg = "未輸入新密碼";
+	}
+	$msg .= $obj->JS_CntDn( $_SESSION['currURL'] , $wt);
+    $view->assign('msg', $msg);
+    $view->display('Message.mtpl');
+    break;
   case "DelHw":
     $wt=5000;
     if( isset($_GET['c'])){

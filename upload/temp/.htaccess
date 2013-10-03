@@ -3,6 +3,7 @@ RewriteEngine on
 #RewriteRule \.(jpg|jpeg|png|gif)$ - [NC,F,L]
 
 # 依據實際路徑更改
-RewriteCond %{HTTP_REFERER} !^http(s)?://192.168.0.1/hwtest/homework.php [NC]
-# 所有檔案均拒絕存取
+RewriteCond %{HTTP_REFERER} !^http(s)?://192.168.0.1/hwtest/manage.php [NC]
+# 拒絕存取作業壓縮檔
+#RewriteRule ^hw([0-9]+)\.zip$ - [NC,F,L]
 RewriteRule (.+) - [NC,F,L]

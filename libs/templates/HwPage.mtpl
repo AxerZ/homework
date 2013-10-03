@@ -114,7 +114,11 @@ $(function() {
     [<a href="javascript:void(0);" class="hwopA" o="dl" sn="{{$e.vc}}">下載</a>] [<a href="javascript:void(0);" class="hwopA"  o="m" sn="{{$e.vc}}">修改</a>] [<a href="javascript:void(0);" class="hwopA" o="d" sn="{{$e.vc}}">刪除</a>]
     <br />
   {{else}}
-    [<a href="javascript:void(0);" class="hwopA" o="dl" sn="{{$e.vc}}">下載</a>]
+	  {{if $d.display eq 1 }}
+		[<a href="{{$smarty.const.SITE_URL}}homework.php?f=View&c={{$e.vc}}">下載</a>]
+	  {{else}}
+		[<a href="javascript:void(0);" class="hwopA" o="dl" sn="{{$e.vc}}">下載</a>]
+	  {{/if}}
   {{/if}}
 
   </div>
@@ -138,7 +142,6 @@ $(function() {
      <input name="c" id="hIDc" value="" type="hidden" />
      <input name="o" id="opHw" value="" type="hidden" />
      <input name="passwd" id="passwd" value="" type="password" />
-     </select>
      <br/><br />
      <input id="sb4" style="margin:10px 0 10px 10px;" value=" 送出 " type="submit" />  <input type="button" value="取消" class="cancel" />
      </form>
