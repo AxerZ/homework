@@ -134,6 +134,15 @@ switch($f){
     $view->assign('msg', $msg);
     $view->display('Message.mtpl');
     break;
+  case "FindUpHwPasswd": //查詢學生作業檔案密碼
+	$thePasswd="";
+	if(isset($_POST['c']) and trim($_POST['c'])<>""){
+		$sn = (int)$obj->LongDecode($_POST['c']);
+		$sql="select `modPasswd` from `hwUpload` where `sn`='".$sn."'";
+		$thePasswd=$obj->DB->GetOne($sql);
+	}
+	echo $thePasswd;
+	break;
   case "Homework":
     if( empty($_POST['c']) &&  empty($_GET['c'])){
       $tbl=array(
