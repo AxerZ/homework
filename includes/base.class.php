@@ -562,7 +562,7 @@ DOC;
       $v=0;
       for($jj=0;$jj<$segment;$jj++){
         if($jj+$ii*$segment >= $slen)break;
-        $r=strpos($code, $s[$jj+$ii*$segment]);
+        $r=strpos($code, $s[(int)($jj+$ii*$segment)]);
         $v += $r* pow($len,$jj);
       }
       $v >>= $shift;
