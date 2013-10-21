@@ -103,11 +103,11 @@ $(function() {
   {{if $e.passed eq 1 }}<div class="hwUnitDiv passedDiv">{{else}}<div class="hwUnitDiv">{{/if}}
     {{if $d.display eq 1 }}
     <a href="{{$smarty.const.SITE_URL}}homework.php?f=View&amp;c={{$e.vc}}"><img src="{{$smarty.const.SITE_URL}}images/png/{{$e.ext}}.png" style="display:block; margin-left:10px;" width="120" height="120" /></a>
-<a href="{{$smarty.const.SITE_URL}}homework.php?f=View&amp;c={{$e.vc}}"><h5>{{$e.cname|default:'不公開'}}</h5></a>{{if $e.passed eq 1 }}<img src="{{$smarty.const.SITE_URL}}images/manage/bullet_tick.png" alt="通過" width="16" height="16" />{{/if}}<H4>{{$e.oFileName}} {{$e.size}}bytes {{$e.cDT}}</h4><br />
+<a href="{{$smarty.const.SITE_URL}}homework.php?f=View&amp;c={{$e.vc}}"><h5>{{$e.cname|default:'不公開'}}</h5></a>{{if $e.passed eq 1 }}<img src="{{$smarty.const.SITE_URL}}images/manage/bullet_tick.png" alt="通過" width="16" height="16" />{{/if}}<H4>{{$e.oFileName}} {{$e.size}}bytes {{$e.uDT}}</h4><br />
     <h4>評分：{{$e.score|default:'無'}}</h4>
     {{else}}
     <img src="{{$smarty.const.SITE_URL}}images/png/{{$e.ext}}.png"  style="display:block; margin-left:10px;"  width="120" height="120" />
-    <h5>{{$e.cname|default:'不公開'}}</h5>{{if $e.passed eq 1 }}<img src="{{$smarty.const.SITE_URL}}images/manage/bullet_tick.png" alt="通過"  width="16" height="16" />{{/if}}<br /><H4><font style="color:#B10B4E;">{{$e.oFileName}}</font> {{$e.size}}bytes {{$e.cDT}}</h4>
+    <h5>{{$e.cname|default:'不公開'}}</h5>{{if $e.passed eq 1 }}<img src="{{$smarty.const.SITE_URL}}images/manage/bullet_tick.png" alt="通過"  width="16" height="16" />{{/if}}<br /><H4><font style="color:#B10B4E;">{{$e.oFileName}}</font> {{$e.size}}bytes {{$e.uDT}}</h4>
     {{/if}}
     <br />
   {{if $d.canUpload eq 1 }}    

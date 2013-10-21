@@ -127,6 +127,7 @@ switch($f){
       $arr['remark']= mysql_real_escape_string(trim( $_POST['remark'] ));
       $arr['cname']= mysql_real_escape_string(trim( $_POST['cname'] ));
       $arr['cDT']=time();
+      $arr['uDT']=$arr['cDT'];  //第一次上傳時，更新時間與新增時間相同
       $IsOk =$obj->ProcAddHwUpload( $arr );
       if( $IsOk>0 ) $msg .="檔案上傳儲存成功 <br />";
       else $msg .= "檔案上傳儲存失敗 Err{$IsOk}";
