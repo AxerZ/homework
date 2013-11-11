@@ -22,5 +22,5 @@ $ chmod 777 libs/templates_c
 ```
 Contact
 -----------
-Problems please contact axer@tc.edu.tw
-My Blog http://note.tc.edu.tw/
+Problems please contact axer@tc.edu.tw  Blog http://note.tc.edu.tw/
+or contact t301000@gmail.com Blog http://163.20.124.29/~t301000/ 
