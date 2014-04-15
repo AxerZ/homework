@@ -17,6 +17,7 @@ $("#sb1").click(function(){
   if( $("#upPasswd").val()==1 && $("#passwd").val()=="")msg += "設定上傳需密碼則上傳作業密碼必填\n";
   if($("#from").val()=="")msg += "上傳開始日期必填\n";
   if($("#to").val()=="")msg += "上傳結束日期必填\n";
+  if($("#to").val() <= $("#from").val())msg += "上傳結束日期必須大於上傳開始日期\n";
   if(msg =="")return true;
   alert("錯誤：\n"+msg);
   return false;
