@@ -3,6 +3,6 @@ RewriteEngine on
 #RewriteRule \.(jpg|jpeg|png|gif)$ - [NC,F,L]
 
 # 依據實際路徑更改
-RewriteCond %{HTTP_REFERER} !^http(s)?://192.168.0.1/hwtest/homework.php [NC]
+#RewriteCond %{HTTP_REFERER} !^http(s)?://192.168.0.1/hwtest/homework.php [NC]
 # 所有檔案均拒絕存取
-RewriteRule (.+) - [NC,F,L]
+#RewriteRule (.+) - [NC,F,L]
