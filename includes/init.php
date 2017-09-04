@@ -18,13 +18,13 @@ define('SendAllEmail', 1);  //Set 1 to enable email
 
 define('SITE_CNAME', "作業上傳精簡版");  //網站標頭
 
-define('SITE_DN', "heart.tc.edu.tw"); //網域，請勿加上'/'
+define('SITE_DN', "163.17.38.84"); //網域名或IP，請勿加上'/'
 
 define('SITE_URL', "http://". SITE_DN ."/homework/");  // 修改網站位址，請保留字串最後的 '/'
 
 // 若為台中地區學校，可指定學校名稱，例：北區太平國小，以供公務帳號登入，留空代表不使用公務帳號功能
 // 若已設定學校，則公務帳號認證後，若屬於設定的學校，將可以直接使用管理功能。
-define('SCH_NAME', "西屯區福科國中");
+define('SCH_NAME', "");
 
 define('UPDIR', "upload/");
 
